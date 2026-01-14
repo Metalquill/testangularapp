@@ -1,0 +1,16 @@
+<div>
+  <app-testarooney
+  testString="{{ bruh }}"
+  ></app-testarooney>
+  <p></p>
+  <div class="property-container">
+    <h3>Property binding</h3>
+    <input type="text" class="styled-input" value="{{ inputValue }}" disabled="{{ isDisabled }}" />
+    <br />
+    <input type="text" class="styled-input" [value]="otherInputValue" [disabled]="isDisabled" />
+  </div>
+  <app-user></app-user>
+  <!-- <p>Value of a: {{ a }}</p>
+  <p>Value of b: {{ b }}</p>
+  <p>Sum of a and b: {{ ans }}</p> -->
+</div>
