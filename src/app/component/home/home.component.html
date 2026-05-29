@@ -1,0 +1,118 @@
+<div *ngIf="displayExample">Structrural Directive Example</div>
+  <h4 *ngIf="nums > 0">{{ nums }} is greater than 0</h4>
+  <h4 *ngIf="nums < 0">{{ nums }} is less than 0</h4>
+  <h4 *ngIf="nums === 0">{{ nums }} is equal to 0</h4>
+  <button (click)="displayElement = !displayElement">Show</button>
+  <div *ngIf="displayElement">
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      possimus praesentium, voluptate deleniti doloremque, neque, 
+      dicta doloremque, neque, dicta doloremque, neque, dicta doloremque, 
+      neque, dicta doloremque, neque, dicta doloremque, neque, 
+      dicta doloremque, neque, dicta doloremque, neque,
+    </p>
+  </div>
+  <div *ngFor="let item of items; index as i">
+    <p>{{ i + 1 }}. {{ item }}</p>
+  </div>
+  <div>
+    <button (click)="toggleEmployees()">Display Employees</button>
+    @if(showEmployees) {
+      <div>
+        <h1>List of Employees</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Position</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(emp of employees(); track emp.id;) {
+              <tr>
+                <td>{{ emp.id }}</td>
+                <td>{{ emp.name }}</td>
+                <td>{{ emp.position }}</td>
+              </tr>
+            }@empty {
+              <h4>No employees to display/are found</h4>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else{
+      <h4>No Employees to display</h4>
+    }
+    </div>
+    <div class="example-container">
+      <div *ngFor="let value of fullStackDev" class="for-example">
+        <ul class="example-lists">
+          <li class="value-list">{{ value.id }}</li>
+          <li class="value-list">{{ value.name }}</li>
+        </ul>
+      </div>
+  </div>
+  <p></p>
+    <div class="property-container">
+    <h3>Counter Example</h3>
+    <div class="btn-container">
+      <button class="counter-btn" (click)="counter('decrement')">--</button>
+      <p class="counter-box">{{ count }}</p>
+      <button class="counter-btn" (click)="counter('increment')">++</button>
+    </div>
+  </div>
+  <p></p>
+  <div class="property-container">
+     <h3>Property binding</h3>
+    <input type="text" class="styled-input" value="{{ inputValue }}" />
+    <br />
+    <input type="text" class="styled-input" [value]="otherInputValue" [disabled]="isDisabled" />
+    <button (click)="display('Welcome')">Click on me</button>
+  </div>
+  <p></p>
+  <div class="property-container"> 
+    <h3 (dblclick)="incr()">Increment - {{ newCount }}</h3>
+    <h3 (drag)="onDrag()">Drag Count - {{ dragCount }}</h3>
+    <input type="text" (keyup)="onKeyPress($event)" />
+    <p class="my-output">{{ wordOutput }}</p>
+    <!-- <input type="text" (keydown.shift.y)="isShift()" />  -->
+     <input type="text" (keydown)="isShift($event)" />
+  </div>
+  <p></p>
+  <div class="property-container" (keydown)="onKeyDown($event)" tabindex="0">
+    <p class="next-counter">Counter : {{ nextCount }}</p>
+    <p class="instruction">Use Up and down arrow keys to <i><b>increment/decrement</b></i> the counter.</p>
+  </div>
+  <p></p>
+  <div class="property-container">
+    <input type="text" [(ngModel)]="staticInput" />
+    <br>
+    <input type="text" [(ngModel)]="dynamicInput" />
+    <h3>{{  dynamicInput }}</h3>
+  </div>
+  <p></p>
+  <div class="property-container">
+    <div class="form-group">
+      <label class="quantity-label">
+        Quantity:
+      </label>
+      <input type="number" class="quantity-input" [(ngModel)]="quantity" min="1" />
+    </div>
+    <div class="price-info">
+      <p>Price per item: <span class="price">{{ pricePerItem }}</span></p>
+    </div>
+    <p></p>
+    <label class="total-label">Total Price:</label>
+    <input type="text" class="total-price-input" readonly [(ngModel)]="totalPrice" />
+  </div>
+  <app-user></app-user>
+  <div [ngSwitch]="age">
+    <p *ngSwitchCase="18">You are 18 years old.</p>
+    <p *ngSwitchCase="25">You are 25 years old.</p>
+    <p *ngSwitchCase="30">You are 30 years old.</p>
+    <p *ngSwitchDefault>You are older than 30 years old. your age is {{ age }}</p>
+  </div>
+   <p>Value of a: {{ a }}</p>
+  <p>Value of b: {{ b }}</p>
+  <p>Sum of a and b: {{ ans }}</p>
