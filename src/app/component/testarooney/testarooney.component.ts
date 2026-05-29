@@ -4,7 +4,7 @@ import { Component, OnInit, Input  } from '@angular/core';
     selector: 'app-testarooney',
     imports: [],
     templateUrl: './testarooney.component.html',
-    styleUrl: './testarooney.component.css',
+    styleUrls: ['./testarooney.component.css'],
     standalone: true,
 })
 export class TestarooneyComponent implements OnInit {
@@ -15,10 +15,8 @@ export class TestarooneyComponent implements OnInit {
     console.log('Ive been clicked')
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+
   }
-
-
- 
-
 }
