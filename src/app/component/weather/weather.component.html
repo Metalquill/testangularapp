@@ -1,4 +1,7 @@
 <div>
     <p>Weather Component</p>
-    <p> Current temperature: {{ weatherData.current.temperature_2m.toPrecision(3) }}</p>
+    <p> {{ location }}</p>
+    <p><strong> Current temperature:</strong> {{ currTemp || 'Loading...' }}</p>
+    <p><strong>Relative humidity:</strong> {{ relativeHumidity || 'Loading...' }}</p>
+    <p><strong>Rain:</strong> {{ rain || 'Loading...' }}</p>
 </div>

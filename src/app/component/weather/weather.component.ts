@@ -1,5 +1,6 @@
 import { Component, OnInit, Input  } from '@angular/core';
 import { fetchWeatherApi } from 'openmeteo';
+import { locationData } from './locationdata';
 
 @Component({
     selector: 'weather-component',
@@ -11,17 +12,22 @@ import { fetchWeatherApi } from 'openmeteo';
 export class WeatherComponent implements OnInit {
 
   weatherData: any = null;
+  currTemp: string | null = null;
+  relativeHumidity: string | null = null;
+  rain: string | null = null;
+  location = locationData[0].name;
+  
 
   async ngOnInit() {
 
 
 const params = {
-	latitude: -43.532055,
-	longitude: 172.63623,
+	latitude: locationData[0].lat,
+	longitude: locationData[0].long,
 	daily: ["sunrise", "sunset", "temperature_2m_max", "temperature_2m_min", "apparent_temperature_max", "apparent_temperature_min", "wind_speed_10m_max", "wind_gusts_10m_max", "wind_direction_10m_dominant", "precipitation_sum", "rain_sum", "weather_code"],
 	hourly: ["temperature_2m", "relative_humidity_2m", "apparent_temperature", "rain", "pressure_msl", "wind_speed_80m", "temperature_80m", "soil_temperature_6cm", "wet_bulb_temperature_2m", "uv_index", "weather_code"],
 	current: ["temperature_2m", "relative_humidity_2m", "rain", "weather_code", "wind_speed_10m", "wind_direction_10m", "apparent_temperature"],
-	timezone: "Pacific/Auckland",
+	timezone: locationData[0].timezone,
 	forecast_days: 1,
 };
 const url = "https://api.open-meteo.com/v1/forecast";
@@ -86,6 +92,10 @@ const daily = response.daily()!;
 const sunrise = daily.variables(0)!;
 const sunset = daily.variables(1)!;
 
+const addunitToTemperature = (temp: number | null): string => {
+  return `${temp} °C`;
+}
+
 // Note: The order of weather variables in the URL query and the indices below need to match!
 this.weatherData = {
 	current: {
@@ -140,6 +150,10 @@ this.weatherData = {
     weather_code: daily.variables(11)!.valuesArray(),
 	},
 };
+
+this.currTemp = addunitToTemperature(this.weatherData.current.temperature_2m.toPrecision(3));
+this.relativeHumidity = `${this.weatherData.current.relative_humidity_2m.toPrecision(3)} %`;
+this.rain = `${this.weatherData.current.rain.toPrecision(3)} mm`;
 
 // The 'weatherData' object now contains a simple structure, with arrays of datetimes and weather information
 console.log(
